@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123b2d">
+<title>Harry’s Christmas Gift Guide</title>
+<style>
+:root{--pine:#123b2d;--pine-light:#1d5941;--berry:#8f343b;--gold:#e7c779;--cream:#fff8e9;--paper:#fffdf7;--ink:#25372e;--muted:#64756b;--line:#e7deca}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:radial-gradient(circle at 10% 5%,rgba(231,199,121,.18),transparent 23rem),radial-gradient(circle at 95% 35%,rgba(168,39,59,.08),transparent 24rem),var(--cream);font-family:Georgia,"Times New Roman",serif}
+.topline{height:8px;background:repeating-linear-gradient(90deg,var(--berry) 0 42px,var(--gold) 42px 48px,var(--pine) 48px 90px)}
+.fairy-lights{display:flex;justify-content:center;gap:clamp(13px,3vw,30px);padding:8px;background:#0b2c21}
+.bulb{width:10px;height:15px;border-radius:50% 50% 45% 45%;display:block;background:#f4d77c;box-shadow:0 0 12px currentColor;color:#f4d77c;animation:twinkle 3.5s ease-in-out infinite alternate}
+.bulb:nth-child(3n+2){background:#e85a69;color:#e85a69;animation-delay:.8s}.bulb:nth-child(3n){background:#6fc79a;color:#6fc79a;animation-delay:1.6s}
+header{text-align:center;padding:37px 18px 32px;background:radial-gradient(ellipse at top,#205b42 0%,#123b2d 68%);color:var(--cream);position:relative;overflow:hidden}
+header:before,header:after{content:"✦";position:absolute;color:var(--gold);font-size:30px;opacity:.8;top:26px}
+header:before{left:max(8%,calc(50% - 280px))}header:after{right:max(8%,calc(50% - 280px))}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.22em;font:700 11px/1.5 Arial,sans-serif}
+h1{margin:12px 0 10px;font-size:clamp(2.45rem,7vw,4.25rem);font-weight:500;line-height:1.04}
+h1 span{color:var(--gold);font-style:italic}
+.subtitle{margin:0 auto;max-width:580px;line-height:1.7;color:#f5ead2;font-size:1.03rem}
+.garland{color:var(--gold);letter-spacing:.65em;font-size:1.15rem;margin-top:18px}
+main{width:min(1000px,calc(100% - 28px));margin:27px auto 48px}
+.intro{text-align:center;margin:0 auto 25px;max-width:680px;line-height:1.8;color:#43564a}
+.intro strong{color:var(--berry)}
+.section-heading{display:flex;align-items:center;gap:12px;margin:30px 0 15px;color:var(--pine)}
+.section-heading:before,.section-heading:after{content:"";height:1px;flex:1;background:var(--line)}
+.section-heading h2{font-size:1.4rem;font-weight:500;margin:0;white-space:nowrap}
+.gifts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.gift{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:16px;box-shadow:0 5px 18px rgba(28,55,41,.045);display:flex;gap:13px;align-items:center;min-height:82px;transition:transform .16s,border-color .16s}
+.gift:hover{transform:translateY(-2px);border-color:#c5ad72}
+.emoji{width:45px;height:45px;flex:0 0 45px;display:grid;place-items:center;border-radius:13px;background:#f6edda;font-size:24px}
+.gift h3{margin:0;color:var(--pine);font-size:1.06rem;font-weight:600;line-height:1.35}
+.gift .tag{margin-top:5px;color:var(--muted);font: .72rem Arial,sans-serif;letter-spacing:.04em}
+.goal{margin-top:39px;border:1px solid #d9c48e;border-radius:19px;overflow:hidden;background:linear-gradient(135deg,#fff4d9,#fffdf7 58%,#e8f0e5);box-shadow:0 8px 24px rgba(28,55,41,.06)}
+.goal-head{text-align:center;padding:29px 22px 23px;background:linear-gradient(135deg,#194a37,#0e3027);color:#fff8e9}
+.goal-head .eyebrow{margin-bottom:9px}
+.goal-head h2{font-size:clamp(2rem,5vw,3rem);line-height:1.08;margin:0;color:#ffe5a1;font-weight:500}
+.goal-head p{margin:12px auto 0;max-width:620px;line-height:1.65;color:#e3eee7}
+.goal-body{padding:clamp(18px,4vw,30px)}
+.goal-caption{text-align:center;color:var(--berry);font:700 11px Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;margin:0 0 24px}
+.materials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.material-group{background:rgba(255,253,247,.88);border:1px solid #e8dec8;border-radius:13px;padding:16px}
+.material-group h3{font-size:1.02rem;color:var(--pine);margin:0 0 10px;font-weight:600}
+.material-group ul{padding-left:19px;margin:0}
+.material-group li{font: .88rem/1.55 Arial,sans-serif;margin:6px 0;color:#48594d}
+.tip{margin-top:18px;padding:14px 16px;border-left:3px solid #c39c4e;background:#f7efd9;border-radius:0 10px 10px 0;font-size:.92rem;line-height:1.6}
+footer{text-align:center;color:var(--muted);font-size:.86rem;padding:20px 12px 0}
+footer .stars{color:var(--berry);letter-spacing:.45em;margin-bottom:8px}
+#snow-layer{pointer-events:none;position:fixed;inset:0;z-index:20;overflow:hidden}
+.snowflake{position:absolute;top:-20px;color:#fff;text-shadow:0 0 5px rgba(255,255,255,.7);user-select:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(360deg);opacity:.12}}
+@keyframes twinkle{from{opacity:.55;filter:brightness(.8)}to{opacity:1;filter:brightness(1.35)}}
+@media(max-width:650px){.gifts,.materials{grid-template-columns:1fr}.gift{padding:14px}.bulb{width:8px;height:12px}header{padding-top:34px}header:before{left:12px}header:after{right:12px}.section-heading h2{font-size:1.2rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}#snow-layer{display:none}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<div class="fairy-lights" aria-hidden="true"><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span></div>
+<div id="snow-layer" aria-hidden="true"></div>
+<header>
+  <div class="eyebrow">A festive gift guide</div>
+  <h1>Harry’s Christmas<br><span>& Birthday Wishlist</span></h1>
+  <p class="subtitle">A collection of gift ideas for anyone wondering what to get Harry this Christmas or birthday. Choose whichever idea feels right for you — there’s no particular order.</p>
+  <div class="garland">✦ ❄ ✦ ❄ ✦</div>
+</header>
+<main>
+  <p class="intro">Thank you for having a look! 🎁 These are just <strong>ideas and inspiration</strong> — anything from the list would be lovely, and there’s absolutely no pressure to choose something big.</p>
 
+  <div class="section-heading"><h2>Tech & making</h2></div>
+  <section class="gifts">
+    <article class="gift"><div class="emoji">💻</div><div><h3>A laptop</h3><div class="tag">TECH & COMPUTING</div></div></article>
+    <article class="gift"><div class="emoji">🖨️</div><div><h3>A 3D printer</h3><div class="tag">MAKING & DESIGN</div></div></article>
+    <article class="gift"><div class="emoji">🥧</div><div><h3>Raspberry Pi starter kit</h3><div class="tag">TECH & ELECTRONICS</div></div></article>
+    <article class="gift"><div class="emoji">🔌</div><div><h3>Electronic maker kit</h3><div class="tag">BUILDING & EXPERIMENTS</div></div></article>
+    <article class="gift"><div class="emoji">⌚</div><div><h3>Apple Watch</h3><div class="tag">TECH ACCESSORIES</div></div></article>
+    <article class="gift"><div class="emoji">🖨️</div><div><h3>HP printer</h3><div class="tag">DESK & HOME OFFICE</div></div></article>
+    <article class="gift"><div class="emoji">✂️</div><div><h3>Cricut machine</h3><div class="tag">CRAFT & DESIGN</div></div></article>
+    <article class="gift"><div class="emoji">🚁</div><div><h3>Mini drone</h3><div class="tag">GADGETS</div></div></article>
+    <article class="gift"><div class="emoji">📽️</div><div><h3>Projector screen</h3><div class="tag">ENTERTAINMENT</div></div></article>
+    <article class="gift"><div class="emoji">🌐</div><div><h3>My own portfolio website and domain</h3><div class="tag">WEB & CREATIVE PROJECTS</div></div></article>
+  </section>
+
+  <div class="section-heading"><h2>Business, books & ideas</h2></div>
+  <section class="gifts">
+    <article class="gift"><div class="emoji">📚</div><div><h3>Business & entrepreneur books</h3><div class="tag">BOOKS & INSPIRATION</div></div></article>
+    <article class="gift"><div class="emoji">📓</div><div><h3>Premium business idea notebook</h3><div class="tag">PLANNING & NOTE-TAKING</div></div></article>
+    <article class="gift"><div class="emoji">📈</div><div><h3>Investing for teens book</h3><div class="tag">BOOKS & LEARNING</div></div></article>
+  </section>
+
+  <div class="section-heading"><h2>Plants & growing</h2></div>
+  <section class="gifts">
+    <article class="gift"><div class="emoji">🌱</div><div><h3>Smart indoor growing kit</h3><div class="tag">GROWING & GARDENING</div></div></article>
+    <article class="gift"><div class="emoji">🌻</div><div><h3>Exotic seeds and garden supplies</h3><div class="tag">GROWING & GARDENING</div></div></article>
+    <article class="gift"><div class="emoji">💧</div><div><h3>Hydroponics kit</h3><div class="tag">GROWING & GARDENING</div></div></article>
+    <article class="gift"><div class="emoji">🪴</div><div><h3>Automatic plant-watering / irrigation system</h3><div class="tag">GARDEN GADGETS</div></div></article>
+    <article class="gift"><div class="emoji">🌡️</div><div><h3>Thermostatically controlled seed-propagation mat</h3><div class="tag">PLANT PROPAGATION</div></div></article>
+  </section>
+
+  <div class="section-heading"><h2>Home, style & little extras</h2></div>
+  <section class="gifts">
+    <article class="gift"><div class="emoji">🕰️</div><div><h3>A retro flip clock</h3><div class="tag">ROOM & DESK DECOR</div></div></article>
+    <article class="gift"><div class="emoji">🗺️</div><div><h3>A framed vintage map of Cambridge</h3><div class="tag">WALL ART</div></div></article>
+    <article class="gift"><div class="emoji">💡</div><div><h3>A proper architect-style desk lamp</h3><div class="tag">DESK & STUDY SPACE</div></div></article>
+    <article class="gift"><div class="emoji">🎒</div><div><h3>A new backpack</h3><div class="tag">EVERYDAY ESSENTIAL</div></div></article>
+    <article class="gift"><div class="emoji">🧦</div><div><h3>Bamboo socks</h3><div class="tag">COSY EXTRAS</div></div></article>
+  </section>
+
+  <section class="goal">
+    <div class="goal-head">
+      <div class="eyebrow">A special saving-up goal</div>
+      <h2>Evergreen Christmas World</h2>
+      <p>Money towards a mini Christmas village 🎄</p>
+    </div>
+    <div class="goal-body">
+      <p class="intro">Another lovely option is a contribution towards this miniature Christmas village project. Here’s the materials checklist from the project plan, so you can see what it’s all for.</p>
+      <div class="goal-caption">Ultimate shopping & materials checklist</div>
+      <div class="materials">
+        <section class="material-group"><h3>01 · Base</h3><ul><li>80 × 60 cm tray / board</li><li>Extra foam board for height</li><li>Brown / white paper</li></ul></section>
+        <section class="material-group"><h3>02 · Building materials</h3><ul><li>8–10 cereal boxes</li><li>Thick cardstock — cream, red, evergreen</li><li>Corrugated cardboard</li><li>Scrap paper for roof tiles, doors and windows</li></ul></section>
+        <section class="material-group"><h3>03 · Town centre</h3><ul><li>Central Christmas tree — green cardstock or bottle brush</li><li>3 market stalls — lolly sticks, card roofs</li><li>2 benches — lolly sticks, brown paint</li><li>4 lanterns — cocktail sticks, beads, black + gold paint</li><li>Town sign / noticeboard</li><li>Winding white paths — cream paper</li><li>Tiny pebbles</li></ul></section>
+        <section class="material-group"><h3>04 · Scenery</h3><ul><li>Snow — white paper, cotton or fake scatter</li><li>15–20 evergreen bottle-brush trees</li><li>Tiny fences & gates — lolly sticks, white paint</li><li>Snowy hills — newspaper + white paper</li><li>Secret woodland cabin with letterbox + sign</li></ul></section>
+        <section class="material-group"><h3>05 · Decorating</h3><ul><li>Pencils, ruler, eraser, scissors, glue stick, PVA, hot glue gun</li><li>Pens — red, green, cream, brown, gold, black</li><li>Paint — evergreen, cranberry, cream, gold, white, brown, black</li><li>Brushes</li><li>Twine, ribbon, buttons, gift wrap</li></ul></section>
+        <section class="material-group"><h3>06 · Tiny details</h3><ul><li>Wooden beads, gold + red ornaments</li><li>Tiny paper stars — gold</li><li>Tiny wreaths — pipe cleaner</li><li>Battery fairy lights — warm white, copper wire, 2 m</li></ul></section>
+        <section class="material-group"><h3>07 · Paperwork archive</h3><ul><li>Small folder with cream pages</li><li>Shop signs: Sugarplum Bakery, Toy Cupboard, North Pole Post, Holly & Berry, Gingerbread, Golden Star, Evergreen Express, Village Green</li><li>Bakery menu, toy catalogue, envelopes, postcards, Gazette, calendar and resident cards for Mabel, Oliver, Edith, Mr Finch and Mayor Clementine</li></ul></section>
+        <section class="material-group"><h3>08 · Safety</h3><ul><li>Adult help for knives, hot glue, electrics</li></ul></section>
+      </div>
+      <div class="tip"><strong>Thank you!</strong> A contribution of any size towards the mini Christmas village would be appreciated just as much as choosing a gift from the list.</div>
+    </div>
+  </section>
+  <footer><div class="stars">✦ ❄ ✦ ❄ ✦</div>Harry’s Christmas & Birthday Gift Guide · Made with festive cheer</footer>
+</main>
+<script>
+(() => {
+ const layer=document.getElementById('snow-layer');
+ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+   function addSnow(){
+     const flake=document.createElement('span');
+     flake.className='snowflake';
+     flake.textContent=Math.random()>.5?'❄':'•';
+     flake.style.left=Math.random()*100+'%';
+     flake.style.fontSize=(8+Math.random()*12)+'px';
+     flake.style.opacity=(.35+Math.random()*.55).toString();
+     flake.style.animationDuration=(7+Math.random()*9)+'s';
+     flake.style.setProperty('--drift',Math.round(Math.random()*140-70)+'px');
+     layer.appendChild(flake);
+     setTimeout(()=>flake.remove(),17000);
+   }
+   for(let i=0;i<16;i++)setTimeout(addSnow,i*250);
+   setInterval(addSnow,650);
+ }
+})();
+</script>
+</body>
+</html>
